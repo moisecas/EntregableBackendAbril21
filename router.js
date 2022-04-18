@@ -1,15 +1,11 @@
 //acá en router.js, archivo que esta afuera de las carpetas, junto a app.js y node modules y el package, se definen las rutas del server
 
 const express = require('express'); 
+const { response } = require('./app');
 const router = express.Router(); 
-const productos = [
-    {
-        id: 1,
-        price: 10,
-        thumbnail: "url1.com" 
 
-    },
-]
+
+
 
 
 
@@ -26,12 +22,17 @@ router.get('/producto', (req, res) => {
 })
 
 router.get('/productos', (req, res) => {
-    res.json(productos);   
+    res.json(response);   
 });
 
 router.get('/ejs', (req, res) => {
     res.render('ejs.ejs')          
 })
+router.get('/post', (req, res) => {
+    res.render('edit.ejs')           
+})
+
+
 
 
 
