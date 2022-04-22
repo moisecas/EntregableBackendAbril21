@@ -1,0 +1,34 @@
+<h2 style="text-align: center;">App chat</h2>  
+<ul class="list-group">
+    
+</ul>
+<form action="">
+    <input type="text" class="form-control" placeholder="ingrese mensaje">
+    <button type="submit" class="btn btn-primary"> Enviar </button>
+</form>
+
+<script src="http://localhost:5000/socket.io/socket.io.js"></script> 
+
+<script>  
+  let socket  = io(); //empezamos trayendo io, lo tenemos gracias a (ver linea 36)
+  //referenciamos los elementos del dom
+  const form = document.querySelector('form')
+  const input = document.querySelector('input') 
+  let mensajes = document.querySelector('ul')
+
+  form.addEventListener('submit', (e)=>{ //referenciamos a form
+      e.preventDefault()
+      if(input.value){ //referenciar a los mensajes del input
+          socket.emit('chat', input.value) // 
+          input.value = '' 
+      }
+  })
+
+  socket.on('chat', (msg)=>{ //con chat capturamos los mensajes 
+      let item = document.createElement('li') //mostramos los mensajes de forma dinamica
+      item.textContent = msg
+      mensajes.appendChild(item) 
+      window.scrollTo(0, document.body.scrollHeight) 
+  })
+
+</script>      
